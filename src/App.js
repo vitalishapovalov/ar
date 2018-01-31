@@ -8,14 +8,29 @@ class ReactArApp extends Component {
   render() {
     return (
       <AFrameRenderer
-        arToolKit={{ trackingMethod: "tango" }}
         inherent={true}
       >
         <Marker parameters={{ preset: "hiro" }}>
           <a-entity
             obj-model="obj: url(https://raw.githubusercontent.com/vitalishapovalov/react-ar/master/src/assets/v.obj); mtl: url(https://raw.githubusercontent.com/vitalishapovalov/react-ar/master/src/assets/v.mtl)"
-            scale="0.3 0.3 0.3"
-          />
+          >
+            <a-animation
+              attribute="rotation"
+              to="360 0 0"
+              dur="2000"
+              easing="linear"
+              repeat="indefinite"
+            />
+          </a-entity>
+          <a-box color="blue" position="0 0.1 0" scale="0.4 0.8 0.8">
+            <a-animation
+              attribute="rotation"
+              to="360 0 0"
+              dur="2000"
+              easing="linear"
+              repeat="indefinite"
+            />
+          </a-box>
         </Marker>
       </AFrameRenderer>
     );

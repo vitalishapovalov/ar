@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <!-- include A-Frame obviously -->
+    <script src="https://aframe.io/releases/0.7.0/aframe.min.js"></script>
+    <!-- include ar.js for A-Frame -->
+    <script src="https://jeromeetienne.github.io/AR.js/aframe/build/aframe-ar.js"></script>
+    <title>Title</title>
+</head>
+<body style="height: 100vh; width: 100%;">
+    <script>
+        /*var time = 0;
+
+        setInterval(function () {
+          time += 1;
+          console.log(time);
+        }, 1000);*/
+    </script>
+    <a-scene arjs='sourceType: webcam;'>
+        <!-- handle marker with hiro preset -->
+        <a-marker preset='hiro'>
+            <a-entity
+                    obj-model="obj: url(https://raw.githubusercontent.com/vitalishapovalov/react-ar/master/src/assets/v.obj); mtl: url(https://raw.githubusercontent.com/vitalishapovalov/react-ar/master/src/assets/v.mtl)"
+                    position="20 -250 -600"
+                    scale="0.4 0.4 0.4"
+                    rotation="0 0 0"
+            >
+                <a-animation
+                        attribute="rotation"
+                        to="0 360 0"
+                        dur="2000"
+                        easing="linear"
+                        repeat="indefinite"
+                />
+            </a-entity>
+        </a-marker>
+
+
+        <!-- define a camera which will move according to the marker position -->
+        <a-marker-camera preset='hiro'></a-marker-camera>
+    </a-scene>
+</body>
+</html>
