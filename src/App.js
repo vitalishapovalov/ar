@@ -14,8 +14,7 @@ class ReactArApp extends Component {
         <Marker parameters={{ preset: "hiro" }}>
           <a-entity
             obj-model="obj: url(https://raw.githubusercontent.com/vitalishapovalov/react-ar/master/src/assets/v.obj); mtl: url(https://raw.githubusercontent.com/vitalishapovalov/react-ar/master/src/assets/v.mtl)"
-            position="-0.1 0.15 0"
-            scale="0.1 0.3 0.3"
+            scale="0.3 0.3 0.3"
           />
         </Marker>
       </AFrameRenderer>
