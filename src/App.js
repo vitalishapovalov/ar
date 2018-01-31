@@ -9,7 +9,9 @@ class ReactArApp extends Component {
     return (
       <AFrameRenderer inherent={true}>
         <Marker parameters={{ preset: "hiro" }}>
-          <a-box color="blue" position="0 0.09 0" scale="0.4 0.8 0.8">
+          <a-obj-model id="model_base"
+                       src="src/assets/v.obj"
+                       mtl="src/assets/v.mtl">
             <a-animation
               attribute="rotation"
               to="360 0 0"
@@ -17,7 +19,7 @@ class ReactArApp extends Component {
               easing="linear"
               repeat="indefinite"
             />
-          </a-box>
+          </a-obj-model>
         </Marker>
       </AFrameRenderer>
     );
