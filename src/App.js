@@ -7,19 +7,16 @@ import { AFrameRenderer, Marker } from 'react-web-ar';
 class ReactArApp extends Component {
   render() {
     return (
-      <AFrameRenderer inherent={true}>
+      <AFrameRenderer
+        arToolKit={{ trackingMethod: "tango" }}
+        inherent={true}
+      >
         <Marker parameters={{ preset: "hiro" }}>
-          <a-obj-model id="model_base"
-                       src="https://raw.githubusercontent.com/vitalishapovalov/react-ar/master/src/assets/v.obj"
-                       mtl="https://raw.githubusercontent.com/vitalishapovalov/react-ar/master/src/assets/v.mtl">
-            <a-animation
-              attribute="rotation"
-              to="360 0 0"
-              dur="2000"
-              easing="linear"
-              repeat="indefinite"
-            />
-          </a-obj-model>
+          <a-entity
+            obj-model="obj: url(https://raw.githubusercontent.com/vitalishapovalov/react-ar/master/src/assets/v.obj); mtl: url(https://raw.githubusercontent.com/vitalishapovalov/react-ar/master/src/assets/v.mtl)"
+            position="-0.1 0.15 0"
+            scale="0.1 0.3 0.3"
+          />
         </Marker>
       </AFrameRenderer>
     );
