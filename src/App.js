@@ -10,8 +10,8 @@ class ReactArApp extends Component {
       <AFrameRenderer inherent={true}>
         <Marker parameters={{ preset: "hiro" }}>
           <a-obj-model id="model_base"
-                       src="src/assets/v.obj"
-                       mtl="src/assets/v.mtl">
+                       src="assets/v.obj"
+                       mtl="assets/v.mtl">
             <a-animation
               attribute="rotation"
               to="360 0 0"
