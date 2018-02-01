@@ -13,10 +13,12 @@ class ReactArApp extends Component {
         <Marker parameters={{ preset: "hiro" }}>
           <a-entity
             obj-model="obj: url(https://raw.githubusercontent.com/vitalishapovalov/react-ar/master/src/assets/v.obj); mtl: url(https://raw.githubusercontent.com/vitalishapovalov/react-ar/master/src/assets/v.mtl)"
+            position="20 -250 -600"
+            scale="0.4 0.4 0.4"
           >
             <a-animation
               attribute="rotation"
-              to="360 0 0"
+              to="0 360 0"
               dur="2000"
               easing="linear"
               repeat="indefinite"
