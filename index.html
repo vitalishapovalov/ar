@@ -9,16 +9,8 @@
     <title>Title</title>
 </head>
 <body style="height: 100vh; width: 100%;">
-    <script>
-        /*var time = 0;
-
-        setInterval(function () {
-          time += 1;
-          console.log(time);
-        }, 1000);*/
-    </script>
     <a-scene arjs='sourceType: webcam;'>
-        <a-marker preset='hiro'>
+        <a-marker type="pattern" url="https://raw.githubusercontent.com/vitalishapovalov/react-ar/master/src/assets/pattern-v.patt">
             <a-entity
                     obj-model="obj: url(https://raw.githubusercontent.com/vitalishapovalov/react-ar/master/src/assets/v.obj); mtl: url(https://raw.githubusercontent.com/vitalishapovalov/react-ar/master/src/assets/v.mtl)"
                     position="0 0 0"
@@ -34,7 +26,6 @@
                 />
             </a-entity>
         </a-marker>
-
         <a-entity camera></a-entity>
     </a-scene>
 </body>
