@@ -54,7 +54,7 @@ AFRAME.registerComponent('refraction-shader', {
         time: { value: 0.0 },
         texture: { type: 't', value: texture },
         // pull to see the throshold: 0.7-ish solid glass/water ("upsidevdown"), 0.8+ thinner glass ("magnifying glass")
-        // refractionIndex: { type: 'f', value: 0.7 },
+        refractionIndex: { type: 'f', value: 0.7 },
 
         // This is actually the inverse of the refraction index:
         refractionIndex: { type: 'f', value: this.data.refractionIndex },
