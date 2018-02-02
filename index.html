@@ -9,7 +9,7 @@
     <script src="src/component-refraction.js"></script>
     <title>Title</title>
     <style>
-        #arjsDebugUIContainer {display:none!important;}
+        #arjsDebugUIContainer {display:block!important;}
     </style>
 </head>
 <body style="height: 100vh; width: 100%;">
@@ -19,7 +19,7 @@
                     obj-model="obj: url(assets/v.obj); mtl: url(assets/v.mtl)"
                     position="0 0 0"
                     scale="0.001 0.0006 0.001"
-                    refraction-shader
+                    refraction-shader="distance: 2;"
             >
                 <a-animation
                         attribute="rotation"

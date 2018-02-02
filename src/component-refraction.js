@@ -1,18 +1,11 @@
-// This is all based off Jerome Etienne's work, and he originally linked to
-// these two sources, so I'll do the same here:
-// http://http.developer.nvidia.com/CgTutorial/cg_tutorial_chapter07.html
-// https://www.clicktorelease.com/code/streetViewReflectionMapping/#51.50700703827454,-0.12791916931155356
-
 AFRAME.registerComponent('refraction-shader', {
   schema: {
     refractionIndex: { type : 'number', default: 0.9 },
     distance: { type : 'number', default: 1 },
-    // TODO :  add tint color to *= the color of gl_FragColor :)
     tintColor : { default : [255, 255, 255] },
     opacity: { default : 1 }
   },
   init: function () {
-    // Mostly from Jerome Etienne, except refractionRatio -> refractionIndex because that makes more sense to me
     const vertexShader = `varying vec3 vRefract;
         uniform float refractionIndex;
 
@@ -22,7 +15,7 @@ AFRAME.registerComponent('refraction-shader', {
             vRefract = normalize( refract( normalize( mPosition.xyz - cameraPosition ), nWorld, refractionIndex ) );
 
             gl_Position = projectionMatrix * modelViewMatrix * vec4( position, 1.0 );
-        }`
+        }`;
 
     const fragShader = `uniform sampler2D texture;
         varying vec3 vRefract;
@@ -50,10 +43,11 @@ AFRAME.registerComponent('refraction-shader', {
             // color.b = normalize(color.b * tintColor.b);
             gl_FragColor = vec4(color, opacity );
             // gl_FragColor = vec4(normalize(tintColor), opacity );
-        }`
+        }`;
 
-    var texture = new THREE.VideoTexture(this.el.sceneEl.systems.arjs.arToolkitSource.domElement)
-    texture.minFilter =  THREE.NearestFilter
+    var texture = new THREE.VideoTexture(this.el.sceneEl.systems.arjs.arToolkitSource.domElement);
+
+    texture.minFilter =  THREE.NearestFilter;
 
     this.material  = new THREE.ShaderMaterial({
       uniforms: {
@@ -67,40 +61,34 @@ AFRAME.registerComponent('refraction-shader', {
         // experiment to adjust offset to video-plane. set to 1 for no effect
         distance: { type: 'f', value: this.data.distance },
         tintColor: { type: 'vec3', value: new THREE.Color(this.data.tintColor.r, this.data.tintColor.g, this.data.tintColor.b)},
-        opacity: { type: 'f', value: this.data.opacity},
+        opacity: { type: 'f', value: this.data.opacity }
       },
-      // Note, idk why exactly, but it appears that you NEED to explicitly
-      // name the vertexShader & fragmentShader arguments and not just as:
-      // vertexShader,
-      // fragShader
-      //
-      // Will expore this some other time ¯\_(ツ)_/¯
       vertexShader : vertexShader,
       fragmentShader : fragShader
     });
     this.material.uniforms.texture.value.wrapS = this.material.uniforms.texture.value.wrapT = THREE.ClampToEdgeWrapping;
     this.applyToMesh();
-    this.el.addEventListener('model-loaded', () => this.applyToMesh());
+    this.el.addEventListener('model-loaded', this.applyToMesh.bind(this));
   },
   /**
    * Apply the material to the current entity.
    */
   applyToMesh: function() {
-    const mesh = this.el.getObject3D('mesh')
+    const mesh = this.el.getObject3D('mesh');
     if (mesh) {
-      var mat = this.material
+      var mat = this.material;
       mesh.traverse(function (node) {
         if (node.isMesh) {
           node.material = mat
         }
-      })
+      });
     }
   },
   tick: function (t) {
-    this.material.uniforms.time.value = t / 1000
-    this.material.uniforms.refractionIndex.value = this.data.refractionIndex
-    this.material.uniforms.distance.value = this.data.distance
-    this.material.uniforms.tintColor.value = this.data.tintColor
-    this.material.uniforms.opacity.value = this.data.opacity
+    this.material.uniforms.time.value = t / 1000;
+    this.material.uniforms.refractionIndex.value = this.data.refractionIndex;
+    this.material.uniforms.distance.value = this.data.distance;
+    this.material.uniforms.tintColor.value = this.data.tintColor;
+    this.material.uniforms.opacity.value = this.data.opacity;
   }
-})
+});
