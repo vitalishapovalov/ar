@@ -6,8 +6,12 @@ AFRAME.registerComponent('refraction-shader', {
     opacity: { default : 1 }
   },
 
+  /**
+   * Create shaders, generate material and apply mesh
+   */
   init: function () {
-    const vertexShader = `varying vec3 vRefract;
+    const vertexShader = verbatim(function () {/*
+        varying vec3 vRefract;
         uniform float refractionIndex;
 
         void main() {
@@ -16,22 +20,18 @@ AFRAME.registerComponent('refraction-shader', {
             vRefract = normalize( refract( normalize( mPosition.xyz - cameraPosition ), nWorld, refractionIndex ) );
 
             gl_Position = projectionMatrix * modelViewMatrix * vec4( position, 1.0 );
-        }`;
+        }
+    */});
 
-    const fragShader = `uniform sampler2D texture;
+    const fragShader = verbatim(function () {/*
+        uniform sampler2D texture;
         varying vec3 vRefract;
-        // experiment with distance to the video plane. should do real ray-plane-intersection!
-
         uniform float distance;
         uniform float opacity;
-
         uniform vec3 tintColor;
 
         void main(void) {
-            // 2d video plane lookup
-            // todo: ! here we could raytrace the ray into the _markerplane_! we know this ("reasonable area around the marker")
             vec2 p = vec2(vRefract.x*distance + 0.5, vRefract.y*distance + 0.5);
-
             vec3 color = texture2D( texture, p ).rgb;
 
             // float mixThresh = 0.05;
@@ -44,13 +44,14 @@ AFRAME.registerComponent('refraction-shader', {
             // color.b = normalize(color.b * tintColor.b);
             gl_FragColor = vec4(color, opacity );
             // gl_FragColor = vec4(normalize(tintColor), opacity );
-        }`;
+        }
+    */});
 
     const texture = new THREE.VideoTexture(this.el.sceneEl.systems.arjs.arToolkitSource.domElement);
 
-    texture.minFilter =  THREE.NearestFilter;
+    texture.minFilter = THREE.NearestFilter;
 
-    this.material  = new THREE.ShaderMaterial({
+    this.material = new THREE.ShaderMaterial({
       uniforms: {
         time: { value: 0.0 },
         texture: { type: 't', value: texture },
@@ -95,3 +96,11 @@ AFRAME.registerComponent('refraction-shader', {
     this.material.uniforms.opacity.value = this.data.opacity;
   }
 });
+
+/**
+ * Process shader code
+ *
+ * @param {Function} fn
+ * @return {String}
+ */
+function verbatim(fn){return fn.toString().match(/[^]*\/\*\s*([^]*)\s*\*\/\}$/)[1]}
