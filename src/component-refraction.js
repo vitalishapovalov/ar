@@ -45,7 +45,7 @@ AFRAME.registerComponent('refraction-shader', {
             // gl_FragColor = vec4(normalize(tintColor), opacity );
         }`;
 
-    var texture = new THREE.VideoTexture(this.el.sceneEl.systems.arjs.arToolkitSource.domElement);
+    const texture = new THREE.VideoTexture(this.el.sceneEl.systems.arjs.arToolkitSource.domElement);
 
     texture.minFilter =  THREE.NearestFilter;
 
@@ -53,12 +53,7 @@ AFRAME.registerComponent('refraction-shader', {
       uniforms: {
         time: { value: 0.0 },
         texture: { type: 't', value: texture },
-        // pull to see the throshold: 0.7-ish solid glass/water ("upsidevdown"), 0.8+ thinner glass ("magnifying glass")
-        refractionIndex: { type: 'f', value: 0.7 },
-
-        // This is actually the inverse of the refraction index:
         refractionIndex: { type: 'f', value: this.data.refractionIndex },
-        // experiment to adjust offset to video-plane. set to 1 for no effect
         distance: { type: 'f', value: this.data.distance },
         tintColor: { type: 'vec3', value: new THREE.Color(this.data.tintColor.r, this.data.tintColor.g, this.data.tintColor.b)},
         opacity: { type: 'f', value: this.data.opacity }
