@@ -1,4 +1,4 @@
-AFRAME.registerComponent('refraction-shader', {
+AFRAME.registerComponent('refraction-material', {
   schema: {
     refractionIndex: { type : 'number', default: 0.9 },
     distance: { type : 'number', default: 1 },
