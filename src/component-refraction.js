@@ -5,6 +5,7 @@ AFRAME.registerComponent('refraction-shader', {
     tintColor : { default : [255, 255, 255] },
     opacity: { default : 1 }
   },
+
   init: function () {
     const vertexShader = `varying vec3 vRefract;
         uniform float refractionIndex;
@@ -65,6 +66,7 @@ AFRAME.registerComponent('refraction-shader', {
     this.applyToMesh();
     this.el.addEventListener('model-loaded', this.applyToMesh.bind(this));
   },
+
   /**
    * Apply the material to the current entity.
    */
@@ -79,6 +81,12 @@ AFRAME.registerComponent('refraction-shader', {
       });
     }
   },
+
+  /**
+   * Set defaults
+   *
+   * @param {Number} t
+   */
   tick: function (t) {
     this.material.uniforms.time.value = t / 1000;
     this.material.uniforms.refractionIndex.value = this.data.refractionIndex;

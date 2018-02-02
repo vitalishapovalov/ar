@@ -14,7 +14,7 @@
 </head>
 <body style="height: 100vh; width: 100%;">
     <script>
-      window.alert('experiment 3');
+      window.alert('experiment 4');
     </script>
     <a-scene arjs='sourceType: webcam;'>
         <a-marker preset="custom" url="assets/pattern-v.patt">
@@ -22,12 +22,12 @@
                     obj-model="obj: url(assets/v.obj); mtl: url(assets/v.mtl)"
                     position="0 0 0"
                     scale="0.001 0.0006 0.001"
-                    refraction-shader="distance: 1; refractionIndex: 0.68; opacity: 1; tintColor: [255, 255, 255];"
+                    refraction-shader="distance: 1; refractionIndex: 0.85; opacity: 0.6; tintColor: [255, 255, 255];"
             >
                 <a-animation
                         attribute="rotation"
                         to="0 360 0"
-                        dur="5000"
+                        dur="6000"
                         easing="linear"
                         repeat="indefinite"
                 />
