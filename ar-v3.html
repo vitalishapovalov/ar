@@ -1,34 +1,70 @@
 <!DOCTYPE html>
+
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <script src="https://aframe.io/releases/0.7.0/aframe.min.js"></script>
-    <script src="src/aframe-ar-before-rewrite.js"></script>
-    <script src="src/component-refraction.js"></script>
-    <title>Title</title>
-    <style>
-        #arjsDebugUIContainer {display:none!important;}
-    </style>
-</head>
-<body style="height: 100vh; width: 100%;">
-<a-scene arjs='sourceType: webcam;'>
-    <a-marker preset="custom" url="assets/pattern-v.patt">
-        <a-entity
-                obj-model="obj: url(assets/v.obj); mtl: url(assets/v.mtl)"
-                position="0 0 0"
-                scale="0.0032 0.002 0.0032"
-                refraction-material="refractionIndex: 0.85; opacity: 1; distance: 1.7; tintColor: [0, 0, 0];"
-        >
-            <a-animation
-                    attribute="rotation"
-                    to="0 360 0"
-                    dur="6000"
-                    easing="linear"
-                    repeat="indefinite"
-            />
-        </a-entity>
-    </a-marker>
-    <a-entity camera></a-entity>
-</a-scene>
-</body>
+
+    <head>
+        <meta charset="UTF-8">
+        <link rel="stylesheet" href="src/app.css">
+        <link rel="stylesheet" href="https://raw.githubusercontent.com/Vintage-web-production/vintage-popup/master/dist/vintage-popup.min.css">
+        <link rel="stylesheet" href="https://raw.githubusercontent.com/Vintage-web-production/vintage-popup/master/dist/popup-default-theme.min.css">
+        <script
+                src="http://code.jquery.com/jquery-3.3.1.min.js"
+                integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+                crossorigin="anonymous">
+        </script>
+        <script src="src/vintage-popup.min.js"></script>
+        <script src="https://aframe.io/releases/0.7.0/aframe.min.js"></script>
+        <script src="src/aframe-ar-before-rewrite.js"></script>
+        <script src="src/component-refraction.js"></script>
+        <title>Vintage AR</title>
+    </head>
+
+    <body>
+    <!-- Demo modal -->
+    <!-- Button which triggers modal, place it somewhere on the screen or just left hidden -->
+    <button data-popup-target="example"></button>
+    <!-- Popup with link -->
+    <div class="popup" data-popup-id="example" tabindex="-1" role="dialog">
+        <div class="popup__container">
+            <div class="popup__close"><span></span><span></span></div>
+            <div class="popup__content">
+                <div class="popup__title">Vintage AR demo</div>
+                <div class="popup__body">
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                </div>
+                <div class="popup__buttons">
+                    <a class="button" href="assets/V_AR.png" target="_blank" rel="noopener">Download marker</a>
+                    <div class="popup__close button">Skip, i got it</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+      var popup = $('button').popup();
+      popup.open()
+    </script>
+    <!-- Demo modal end -->
+
+    <a-scene arjs='sourceType: webcam;'>
+        <a-marker preset="custom" url="assets/pattern-v.patt">
+            <a-entity
+                    obj-model="obj: url(assets/v.obj); mtl: url(assets/v.mtl)"
+                    position="0 0 0"
+                    scale="0.0032 0.002 0.0032"
+                    refraction-material="refractionIndex: 0.85; opacity: 1; distance: 1.7; tintColor: [0, 0, 0];"
+            >
+                <a-animation
+                        attribute="rotation"
+                        to="0 360 0"
+                        dur="6000"
+                        easing="linear"
+                        repeat="indefinite"
+                />
+            </a-entity>
+        </a-marker>
+        <a-entity camera></a-entity>
+    </a-scene>
+    </body>
+
 </html>
