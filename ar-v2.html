@@ -15,17 +15,11 @@
     <a-marker preset="custom" url="assets/pattern-v.patt">
         <a-entity
                 obj-model="obj: url(assets/v.obj); mtl: url(assets/v.mtl)"
-                position="0 0 0"
-                scale="0.0032 0.002 0.0032"
-                refraction-material="refractionIndex: 0.85; opacity: 1; distance: 1.7; tintColor: [0, 0, 0];"
+                position="0 0.65 -0.5"
+                scale="0.0024 0.0015 0.0024"
+                refraction-material="refractionIndex: 0.85; opacity: 1; distance: 1.15; tintColor: [0, 0, 0];"
+                rotation="-140 0 0"
         >
-            <a-animation
-                    attribute="rotation"
-                    to="0 360 0"
-                    dur="6000"
-                    easing="linear"
-                    repeat="indefinite"
-            />
         </a-entity>
     </a-marker>
     <a-entity camera></a-entity>
